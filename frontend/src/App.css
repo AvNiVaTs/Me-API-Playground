@@ -1,0 +1,151 @@
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(159deg, rgba(0,28,55,1) 0%, rgb(8, 44, 98) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.app-header {
+  margin-bottom: 30px;
+}
+
+.app-title {
+  color: white;
+  font-size: 3em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Updated main-content for single-column layout */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;/* Use a fixed max-width for the cards */
+}
+
+.glass-box {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 25px;
+  color: white;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  width: 200%; /* Ensures the card stretches to the full width of the container */
+}
+
+.glass-box h2 {
+  color: white;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 10px;
+}
+
+.glass-box p, .glass-box ul {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.glass-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.glass-box li {
+  margin-bottom: 5px;
+}
+
+.glass-box a {
+  color: #e0f7fa;
+  text-decoration: none;
+}
+
+.glass-box a:hover {
+  text-decoration: underline;
+}
+
+.search-section {
+  display: flex;
+  margin-top: 15px;
+}
+
+.search-section input {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  margin-right: 10px;
+}
+
+.search-section input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.search-section button {
+  background-color: #e0f7fa;
+  color: #2193b0;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.search-section button:hover {
+  background-color: #b2ebf2;
+}
+
+.project-item, .work-item {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.project-item:last-child, .work-item:last-child {
+  border-bottom: none;
+}
+
+.create-card-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.create-card-button:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.5);
+}
