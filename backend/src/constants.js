@@ -1,0 +1,1 @@
+export const DB_NAME = "me_api_db"
