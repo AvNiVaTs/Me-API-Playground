@@ -1,7 +1,7 @@
-import {Skill} from '../models/skill.model';
-import {asyncHandler} from '../models/asyncHandler.js';
-import {ApiErr} from '../models/apiErr.model.js';
-import {ApiResponse} from '../models/apiResponse.model.js';
+import {Skill} from '../models/skills.model.js';
+import {asyncHandler} from '../utils/asyncHandler.js';
+import {ApiErr} from '../utils/ApiErr.js';
+import {ApiResponse} from '../utils/ApiResponse.js';
 
 // Get Top Skills
 const getTopSkills = asyncHandler(async (req, res) => {

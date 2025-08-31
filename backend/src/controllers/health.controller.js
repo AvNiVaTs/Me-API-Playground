@@ -1,6 +1,6 @@
-import {asyncHandler} from '../models/asyncHandler.js';
-import {ApiErr} from '../models/apiErr.model.js';
-import {ApiResponse} from '../models/apiResponse.model.js';
+import {asyncHandler} from '../utils/asyncHandler.js';
+import {ApiErr} from '../utils/ApiErr.js';
+import {ApiResponse} from '../utils/ApiResponse.js';
 
 const getHealth = asyncHandler(async (req, res) => {
   return res

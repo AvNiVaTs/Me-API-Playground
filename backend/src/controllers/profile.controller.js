@@ -1,7 +1,7 @@
 import {Profile} from '../models/profile.model.js';
-import {asyncHandler} from '../models/asyncHandler.js';
-import {ApiErr} from '../models/apiErr.model.js';
-import {ApiResponse} from '../models/apiResponse.model.js';
+import {asyncHandler} from '../utils/asyncHandler.js';
+import {ApiErr} from '../utils/ApiErr.js';
+import {ApiResponse} from '../utils/ApiResponse.js';
 
 // Create Profile
 const createProfile = asyncHandler(async (req, res) => {
