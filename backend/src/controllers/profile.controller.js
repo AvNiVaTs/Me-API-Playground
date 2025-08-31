@@ -1,4 +1,5 @@
 import {Profile} from '../models/profile.model.js';
+import { Skill } from '../models/skills.model.js'
 import {asyncHandler} from '../utils/asyncHandler.js';
 import {ApiErr} from '../utils/ApiErr.js';
 import {ApiResponse} from '../utils/ApiResponse.js';
@@ -7,12 +8,23 @@ import {ApiResponse} from '../utils/ApiResponse.js';
 const createProfile = asyncHandler(async (req, res) => {
   try {
     const profile = await Profile.create(req.body)
+
+    // Add or update skills in Skill collection
+    if (req.body.skills && Array.isArray(req.body.skills)) {
+      for (const skillName of req.body.skills) {
+        await Skill.updateOne(
+          { name: skillName },
+          { $inc: { count: 1 } },
+          { upsert: true }
+        )
+      }
+    }
+
     return res
-    .status(201)
-    .json(
-      new ApiResponse(201, 'Profile created', profile)
-    )
+      .status(201)
+      .json(new ApiResponse(201, 'Profile created', profile))
   } catch (err) {
+    console.error('Profile creation error:', err)
     throw new ApiErr(400, 'Profile creation failed')
   }
 })
@@ -23,7 +35,9 @@ const getProfile = asyncHandler(async (req, res) => {
     const profile = await Profile.findOne()
       .populate('projects')
     if (!profile) return res.status(404).json({ error: 'Profile not found' })
-    return res.json(
+    return res
+    .status(200)
+    .json(
       new ApiResponse(profile)
     )
   } catch (err) {
@@ -35,11 +49,23 @@ const getProfile = asyncHandler(async (req, res) => {
 const updateProfile = asyncHandler(async (req, res) => {
   try {
     const profile = await Profile.findOneAndUpdate({}, req.body, { new: true })
-    if (!profile) return res.status(404).json({ error: 'Profile not found' })
-    res.json(
-      new ApiResponse(profile)
-    )
+
+    // Add or update skills in Skill collection
+    if (req.body.skills && Array.isArray(req.body.skills)) {
+      for (const skillName of req.body.skills) {
+        await Skill.updateOne(
+          { name: skillName },
+          { $inc: { count: 1 } },
+          { upsert: true }
+        )
+      }
+    }
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, 'Profile updated', profile))
   } catch (err) {
+    console.error('Profile update error:', err)
     throw new ApiErr(400, 'Profile update failed')
   }
 })
