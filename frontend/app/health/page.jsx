@@ -33,7 +33,7 @@ export default function HealthPage() {
           )}
         </GlassCard>
         <p className="mt-3 text-xs text-foreground/60">
-          This calls GET /health on your backend at NEXT_PUBLIC_API_URL.
+          Get health details here.
         </p>
       </section>
     </main>
