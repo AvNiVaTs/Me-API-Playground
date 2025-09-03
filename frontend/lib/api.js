@@ -1,7 +1,7 @@
 // Centralized API client (client-side). Reads external API base URL from NEXT_PUBLIC_API_URL.
 export const API_BASE =
   (typeof window !== "undefined" && window.__API_BASE__) ||
-  process.env.NEXT_PUBLIC_API_URL ||
+  `${process.env.NEXT_PUBLIC_API_URL}/api/v1` ||
   ""
 
 export async function apiFetch(path, opts = {}) {
