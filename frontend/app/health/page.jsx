@@ -17,7 +17,7 @@ export default function HealthPage() {
           {isLoading ? (
             <p className="text-foreground/80">Checking...</p>
           ) : error ? (
-            <p className="text-destructive">Health check failed: {String(error?.message || error)}</p>
+            <p className="text-destructive">Health check failed</p>
           ) : (
             <div className="flex items-center gap-3">
               <span
