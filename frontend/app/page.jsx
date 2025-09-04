@@ -52,7 +52,7 @@ export default function HomePage() {
 
           <GlassCard className="p-5">
             <h3 className="text-base font-semibold text-primary">Health</h3>
-            <p className="mt-1 text-sm text-foreground/80">Check if the API is alive.</p>
+            <p className="mt-1 text-sm text-foreground/80">Check Health.</p>
             <Link
               href="/health"
               className="mt-3 inline-block rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
