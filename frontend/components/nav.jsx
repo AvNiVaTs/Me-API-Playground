@@ -23,7 +23,7 @@ export function Nav() {
           )}
           aria-label="Primary"
         >
-          <Link href="/" className="font-semibold text-primary">
+          <Link href="/" className="font-semibold text-card-foreground">
             Me-API
           </Link>
           <ul className="flex items-center gap-3">
@@ -33,7 +33,10 @@ export function Nav() {
                   href={l.href}
                   className={cn(
                     "rounded-md px-3 py-1.5 text-sm transition-colors",
-                    pathname === l.href ? "bg-primary/20 text-primary" : "text-foreground/80 hover:text-foreground",
+                    /* Using solid colors instead of semi-transparent for better contrast */
+                    pathname === l.href
+                      ? "bg-primary/20 text-primary-foreground bg-primary"
+                      : "text-card-foreground hover:text-primary-foreground hover:bg-primary/10",
                   )}
                 >
                   {l.label}

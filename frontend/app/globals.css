@@ -7,10 +7,11 @@
   --background: #1f2937;
   --foreground: #ffffff;
 
-  --card: rgba(255, 255, 255, 0.1);
+  /* Using darker glass background for better contrast with light text */
+  --card: rgba(0, 0, 0, 0.4);
   --card-foreground: #ffffff;
 
-  --popover: rgba(255, 255, 255, 0.1);
+  --popover: rgba(0, 0, 0, 0.4);
   --popover-foreground: #ffffff;
 
   --primary: #14b8a6; /* teal-500 */
@@ -19,8 +20,9 @@
   --secondary: #f8fafc;
   --secondary-foreground: #1f2937;
 
-  --muted: #f8fafc;
-  --muted-foreground: #1f2937;
+  /* Using darker muted background for better contrast */
+  --muted: rgba(0, 0, 0, 0.2);
+  --muted-foreground: #d1d5db; /* gray-300 for better contrast on dark glass */
 
   --accent: #ffedd5; /* warm beige */
   --accent-foreground: #1f2937;
@@ -28,8 +30,9 @@
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
+  /* Using darker border for better definition */
   --border: rgba(255, 255, 255, 0.2);
-  --input: rgba(255, 255, 255, 0.1);
+  --input: rgba(0, 0, 0, 0.3);
   --ring: rgba(20, 184, 166, 0.5);
 
   --chart-1: #14b8a6;
@@ -40,7 +43,8 @@
 
   --radius: 0.5rem;
 
-  --sidebar: rgba(255, 255, 255, 0.1);
+  /* Updated sidebar colors to match new dark glass theme */
+  --sidebar: rgba(0, 0, 0, 0.4);
   --sidebar-foreground: #ffffff;
   --sidebar-primary: #14b8a6;
   --sidebar-primary-foreground: #ffffff;
@@ -54,10 +58,11 @@
   --background: #1f2937;
   --foreground: #ffffff;
 
-  --card: rgba(255, 255, 255, 0.1);
+  /* Applied same dark glass fixes to dark mode */
+  --card: rgba(0, 0, 0, 0.4);
   --card-foreground: #ffffff;
 
-  --popover: rgba(255, 255, 255, 0.1);
+  --popover: rgba(0, 0, 0, 0.4);
   --popover-foreground: #ffffff;
 
   --primary: #14b8a6;
@@ -66,8 +71,8 @@
   --secondary: #f8fafc;
   --secondary-foreground: #1f2937;
 
-  --muted: #f8fafc;
-  --muted-foreground: #1f2937;
+  --muted: rgba(0, 0, 0, 0.2);
+  --muted-foreground: #d1d5db;
 
   --accent: #ffedd5;
   --accent-foreground: #1f2937;
@@ -76,7 +81,7 @@
   --destructive-foreground: #ffffff;
 
   --border: rgba(255, 255, 255, 0.2);
-  --input: rgba(255, 255, 255, 0.1);
+  --input: rgba(0, 0, 0, 0.3);
   --ring: rgba(20, 184, 166, 0.5);
 
   --chart-1: #14b8a6;
@@ -85,7 +90,10 @@
   --chart-4: #374151;
   --chart-5: #dc2626;
 
-  --sidebar: rgba(255, 255, 255, 0.1);
+  --radius: 0.5rem;
+
+  /* Updated sidebar colors to match new dark glass theme */
+  --sidebar: rgba(0, 0, 0, 0.4);
   --sidebar-foreground: #ffffff;
   --sidebar-primary: #14b8a6;
   --sidebar-primary-foreground: #ffffff;

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
 import useSWR, { mutate } from "swr"
 import { cn } from "@/lib/utils"
 import { createProfile, updateProfile, getProfile } from "@/lib/api"
@@ -8,27 +8,30 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { GlassCard } from "@/components/glass-card"
-import { Badge } from "@/components/ui/badge"
+import { SkillBadges } from "@/components/skill-badges"
 
 const fetcher = () => getProfile()
 
 export function ProfileForm({ className, mode = "edit" }) {
   const { data } = useSWR("profile", fetcher)
   const [saving, setSaving] = useState(false)
+  const [initialized, setInitialized] = useState(false)
   const [form, setForm] = useState({
-    name: data?.name || "",
-    email: data?.email || "",
-    headline: data?.headline || "",
-    summary: data?.summary || "",
-    location: data?.location || "",
-    links: data?.links || {},
-    skills: data?.skills || [],
+    name: "",
+    email: "",
+    headline: "",
+    summary: "",
+    location: "",
+    links: {},
+    skills: [],
   })
 
-  // Sync form with data when editing
-  if (data && !saving && mode === "edit") {
-    if (form.name === "" && data.name) setForm({ ...data })
-  }
+  useEffect(() => {
+    if (data && !initialized && mode === "edit") {
+      setForm({ ...data })
+      setInitialized(true)
+    }
+  }, [data, initialized, mode])
 
   async function onSubmit(e) {
     e.preventDefault()
@@ -46,7 +49,10 @@ export function ProfileForm({ className, mode = "edit" }) {
     const target = e.target
     if (e.key === "Enter" && target.value.trim()) {
       e.preventDefault()
-      setForm((f) => ({ ...f, skills: [...(f.skills || []), target.value.trim()] }))
+      const newSkill = target.value.trim()
+      if (!form.skills?.includes(newSkill)) {
+        setForm((f) => ({ ...f, skills: [...(f.skills || []), newSkill] }))
+      }
       target.value = ""
     }
   }
@@ -121,7 +127,9 @@ export function ProfileForm({ className, mode = "edit" }) {
             <label className="text-sm font-medium text-muted-foreground">GitHub</label>
             <Input
               value={form.links?.github || ""}
-              onChange={(e) => setForm({ ...form, links: { ...form.links, github: e.target.value } })}
+              onChange={(e) =>
+                setForm({ ...form, links: { ...form.links, github: e.target.value } })
+              }
               placeholder="https://github.com/you"
             />
           </div>
@@ -129,7 +137,9 @@ export function ProfileForm({ className, mode = "edit" }) {
             <label className="text-sm font-medium text-muted-foreground">LinkedIn</label>
             <Input
               value={form.links?.linkedin || ""}
-              onChange={(e) => setForm({ ...form, links: { ...form.links, linkedin: e.target.value } })}
+              onChange={(e) =>
+                setForm({ ...form, links: { ...form.links, linkedin: e.target.value } })
+              }
               placeholder="https://linkedin.com/in/you"
             />
           </div>
@@ -140,7 +150,9 @@ export function ProfileForm({ className, mode = "edit" }) {
             <label className="text-sm font-medium text-muted-foreground">Portfolio</label>
             <Input
               value={form.links?.portfolio || ""}
-              onChange={(e) => setForm({ ...form, links: { ...form.links, portfolio: e.target.value } })}
+              onChange={(e) =>
+                setForm({ ...form, links: { ...form.links, portfolio: e.target.value } })
+              }
               placeholder="https://your.site"
             />
           </div>
@@ -148,7 +160,9 @@ export function ProfileForm({ className, mode = "edit" }) {
             <label className="text-sm font-medium text-muted-foreground">Website</label>
             <Input
               value={form.links?.website || ""}
-              onChange={(e) => setForm({ ...form, links: { ...form.links, website: e.target.value } })}
+              onChange={(e) =>
+                setForm({ ...form, links: { ...form.links, website: e.target.value } })
+              }
               placeholder="https://blog.you.dev"
             />
           </div>
@@ -159,19 +173,12 @@ export function ProfileForm({ className, mode = "edit" }) {
           <div className="flex items-center gap-2">
             <Input onKeyDown={handleSkillAdd} placeholder="Type a skill and press Enter" />
           </div>
-          <div className="flex flex-wrap gap-2 pt-1">
-            {(form.skills || []).map((s) => (
-              <Badge
-                key={s}
-                variant="secondary"
-                className="cursor-pointer"
-                onClick={() => removeSkill(s)}
-                title="Click to remove"
-              >
-                {s}
-              </Badge>
-            ))}
+          <div className="pt-1">
+            <SkillBadges skills={form.skills} onClick={removeSkill} />
           </div>
+          {form.skills && form.skills.length > 0 && (
+            <p className="text-xs text-muted-foreground">Click on a skill to remove it</p>
+          )}
         </div>
       </form>
     </GlassCard>
