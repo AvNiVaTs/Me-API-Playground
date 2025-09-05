@@ -77,4 +77,5 @@ export const createProject = async (payload) => apiFetch('/projects', {
 
 export const getTopSkills = async () => apiFetch('/skills/top');
 
-export const searchAll = async (q) => apiFetch(`/search?q=${encodeURIComponent(q)}`);
+// This function has been updated to use the correct path.
+export const searchAll = async (q) => apiFetch(`/search/projects?q=${encodeURIComponent(q)}`);
