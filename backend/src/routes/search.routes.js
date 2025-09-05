@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getTopSkills } from "../controllers/skill.controller.js";
+import { searchAll } from "../controllers/search.controller.js";
 
 const router = Router();
 
-router.get("/top", getTopSkills);
+router.get("/projects", searchAll);
 
 export default router;
