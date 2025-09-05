@@ -1,10 +1,11 @@
-import { Router } from "express"
-import { createProfile, getProfile, updateProfile } from "../controllers/profile.controller.js"
+import { Router } from "express";
+import { createProfile, getProfile, updateProfile, deleteProfile } from "../controllers/profile.controller.js";
 
-const router = Router()
+const router = Router();
 
-router.get("/", getProfile)
-router.post("/", createProfile)
-router.put("/", updateProfile)
+router.post("/", createProfile);
+router.get("/", getProfile);
+router.put("/", updateProfile);
+router.delete("/", deleteProfile);
 
-export default router
+export default router;

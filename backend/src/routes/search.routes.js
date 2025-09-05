@@ -1,8 +1,8 @@
-import { Router } from "express"
-import { searchProfileData } from "../controllers/search.controller.js"
+import { Router } from "express";
+import { getTopSkills } from "../controllers/skill.controller.js";
 
-const router = Router()
+const router = Router();
 
-router.get("/", searchProfileData)
+router.get("/top", getTopSkills);
 
-export default router
+export default router;

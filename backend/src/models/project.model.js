@@ -4,12 +4,15 @@ import mongoose from 'mongoose';
 const ProjectSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: String,
+  startMonth: String,
+  startYear: String,
+  endMonth: String,
+  endYear: String,
   links: {
-    github: String,
-    live: String,
     demo: String,
+    repo: String,
   },
-  skills: [{ type: String }], // or [{ type: mongoose.Schema.Types.ObjectId, ref: 'Skill' }]
-})
+  skills: [{ type: String }],
+});
 
-export const Project = mongoose.model('Project', ProjectSchema)
+export const Project = mongoose.model('Project', ProjectSchema);

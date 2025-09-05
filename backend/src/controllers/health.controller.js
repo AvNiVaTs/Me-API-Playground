@@ -1,15 +1,14 @@
-import {asyncHandler} from '../utils/asyncHandler.js';
-import {ApiErr} from '../utils/ApiErr.js';
-import {ApiResponse} from '../utils/ApiResponse.js';
+import { Health } from '../models/health.model.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
+import { ApiResponse } from '../utils/ApiResponse.js';
 
-const getHealth = asyncHandler(async (req, res) => {
-  return res
-  .status(200)
-  .json(
-    new ApiResponse('API is healthy')
-  )
-})
-
-export {
-  getHealth
-}
+export const getHealth = asyncHandler(async (req, res) => {
+  const healthStatus = await Health.findOne({});
+  if (healthStatus) {
+    return res.status(200).json(new ApiResponse(200, { status: healthStatus.status }));
+  }
+  
+  const newHealth = new Health({ status: 'OK' });
+  await newHealth.save();
+  res.status(200).json(new ApiResponse(200, { status: 'OK' }));
+});
