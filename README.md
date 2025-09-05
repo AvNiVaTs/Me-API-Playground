@@ -51,7 +51,7 @@ To get a copy of this project up and running on your local machine, follow these
 
 #### **1\. Clone the repository**
 
-git clone \[https://github.com/AvNiVaTs/Me-API-Playground.git\](https://github.com/AvNiVaTs/Me-API-Playground.git)  
+git clone [https://github.com/AvNiVaTs/Me-API-Playground.git](https://github.com/AvNiVaTs/Me-API-Playground.git)  
 cd Me-API-Playground
 
 #### **2\. Backend Setup**
