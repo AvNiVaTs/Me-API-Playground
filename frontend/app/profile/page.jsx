@@ -27,7 +27,7 @@ export default function ProfilePage() {
         ) : error ? (
           <>
             <GlassCard className="p-4 text-destructive">
-              Failed to load profile: {String(error?.message || error)}
+              No Profile Found
             </GlassCard>
             <GlassCard className="p-4">
               <div className="mt-3">

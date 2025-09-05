@@ -12,9 +12,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.app",
+  title: "me-api-playground"
 }
 
 export default function RootLayout({ children }) {
