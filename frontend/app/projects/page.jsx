@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import useSWR from "swr"
 import { useSearchParams, useRouter } from "next/navigation"
 import { getProjects, getTopSkills, searchAll } from "@/lib/api"
@@ -8,12 +9,15 @@ import { GlassCard } from "@/components/glass-card"
 import { SearchInput } from "@/components/search-input"
 import { SkillBadges } from "@/components/skill-badges"
 import { ProjectCard } from "@/components/project-card"
+import { ProjectForm } from "@/components/project-form"
+import { Button } from "@/components/ui/button"
 
 export default function ProjectsPage() {
   const params = useSearchParams()
   const router = useRouter()
   const q = params.get("q") ?? ""
   const skill = params.get("skill") ?? ""
+  const [showForm, setShowForm] = useState(false)
 
   const { data: skills } = useSWR("skills-top", getTopSkills)
   const {
@@ -41,7 +45,18 @@ export default function ProjectsPage() {
       <Nav />
       <section className="mx-auto max-w-5xl px-4 py-8">
         <div className="mb-4 flex flex-col gap-3">
-          <h1 className="text-2xl font-bold text-primary">Projects</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-bold text-primary">Projects</h1>
+            <Button
+              onClick={() => setShowForm(true)}
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              Add Project
+            </Button>
+          </div>
+
+          {showForm && <ProjectForm onClose={() => setShowForm(false)} />}
+
           <GlassCard className="p-4">
             <SearchInput />
           </GlassCard>
@@ -62,12 +77,12 @@ export default function ProjectsPage() {
           <p className="text-foreground/80">Loading...</p>
         ) : error ? (
           <GlassCard className="p-4 text-destructive">
-            No Projects Added
+            Failed to load projects: {String(error.message || error)}
           </GlassCard>
         ) : projects && projects.length > 0 ? (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {projects.map((p) => (
-              <ProjectCard key={p.id || p._id} project={p} />
+              <ProjectCard key={p.id} project={p} />
             ))}
           </div>
         ) : (

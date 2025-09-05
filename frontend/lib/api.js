@@ -1,10 +1,8 @@
-// Centralized API client (client-side). Reads external API base URL from NEXT_PUBLIC_API_URL.
 export const API_BASE =
   (typeof window !== "undefined" && window.__API_BASE__) || // helpful for quick overrides in preview
   process.env.NEXT_PUBLIC_API_URL ||
   ""
 
-// Simple fetch wrapper
 export async function apiFetch(path, opts = {}) {
   const url = opts.skipBase ? path : `${API_BASE}${path}`
 
@@ -21,6 +19,7 @@ export async function apiFetch(path, opts = {}) {
         "Content-Type": "application/json",
         ...(opts.headers || {}),
       },
+      // CORS must be allowed by your backend; credentials off by default
       cache: "no-store",
     })
 
@@ -65,17 +64,17 @@ export async function apiFetch(path, opts = {}) {
   }
 }
 
-// ---- Demo storage using localStorage ----
+// Demo storage using localStorage - no backend required
 const DEMO_STORAGE_KEYS = {
   profile: "demo_profile",
   projects: "demo_projects",
   health: "demo_health",
 }
 
-// Simulate API delay
+// Helper to simulate API delay for realistic demo experience
 const delay = (ms = 500) => new Promise((resolve) => setTimeout(resolve, ms))
 
-// Helpers for localStorage
+// Helper to get data from localStorage
 const getStorageData = (key, defaultValue) => {
   if (typeof window === "undefined") return defaultValue
   try {
@@ -86,6 +85,7 @@ const getStorageData = (key, defaultValue) => {
   }
 }
 
+// Helper to set data in localStorage
 const setStorageData = (key, data) => {
   if (typeof window === "undefined") return
   try {
@@ -95,7 +95,6 @@ const setStorageData = (key, data) => {
   }
 }
 
-// ---- API Helpers ----
 export const getHealth = async () => {
   await delay(200)
   return { status: "OK" }
@@ -104,7 +103,9 @@ export const getHealth = async () => {
 export const getProfile = async () => {
   await delay()
   const profile = getStorageData(DEMO_STORAGE_KEYS.profile, null)
-  if (!profile) throw new Error("Profile not found")
+  if (!profile) {
+    throw new Error("Profile not found")
+  }
   return profile
 }
 
@@ -126,7 +127,9 @@ export const getTopSkills = async () => {
 export const getProjects = async (skill) => {
   await delay()
   const projects = getStorageData(DEMO_STORAGE_KEYS.projects, [])
+
   if (!skill) return projects
+
   return projects.filter((p) => p.skills?.some((s) => s.toLowerCase().includes(skill.toLowerCase())))
 }
 
@@ -134,13 +137,14 @@ export const searchAll = async (q) => {
   await delay()
   const projects = getStorageData(DEMO_STORAGE_KEYS.projects, [])
   const profile = getStorageData(DEMO_STORAGE_KEYS.profile, null)
+
   const query = q.toLowerCase()
 
   const filteredProjects = projects.filter(
     (p) =>
       p.title.toLowerCase().includes(query) ||
       p.description?.toLowerCase().includes(query) ||
-      p.skills?.some((s) => s.toLowerCase().includes(query))
+      p.skills?.some((s) => s.toLowerCase().includes(query)),
   )
 
   const allSkills = projects.flatMap((p) => p.skills || [])
@@ -181,8 +185,13 @@ export const deleteProfile = async () => {
 export const createProject = async (payload) => {
   await delay()
   const projects = getStorageData(DEMO_STORAGE_KEYS.projects, [])
-  const newProject = { ...payload, id: Date.now().toString() }
+  const newProject = {
+    ...payload,
+    id: Date.now().toString(), // Simple ID generation for demo
+  }
+
   const updatedProjects = [...projects, newProject]
   setStorageData(DEMO_STORAGE_KEYS.projects, updatedProjects)
+
   return newProject
 }

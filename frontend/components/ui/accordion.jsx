@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 
 function Accordion({
   ...props
-}){
+}) {
   return <AccordionPrimitive.Root data-slot="accordion" {...props} />
 }
 

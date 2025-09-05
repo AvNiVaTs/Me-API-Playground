@@ -2,7 +2,11 @@
 
 import { cn } from "@/lib/utils"
 
-export function SkillBadges({ skills, onClick, active }) {
+export function SkillBadges({
+  skills,
+  onClick,
+  active,
+}) {
   if (!skills?.length) return null
   return (
     <div className="flex flex-wrap items-center gap-2">

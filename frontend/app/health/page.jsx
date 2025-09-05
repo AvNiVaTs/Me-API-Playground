@@ -17,7 +17,7 @@ export default function HealthPage() {
           {isLoading ? (
             <p className="text-foreground/80">Checking...</p>
           ) : error ? (
-            <p className="text-destructive">Health check failed</p>
+            <p className="text-destructive">Health check failed: {String(error.message || error)}</p>
           ) : (
             <div className="flex items-center gap-3">
               <span
@@ -33,7 +33,7 @@ export default function HealthPage() {
           )}
         </GlassCard>
         <p className="mt-3 text-xs text-foreground/60">
-          Get health details here.
+          This calls GET /health on your backend at NEXT_PUBLIC_API_URL.
         </p>
       </section>
     </main>

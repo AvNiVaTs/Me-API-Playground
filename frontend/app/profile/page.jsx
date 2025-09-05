@@ -1,12 +1,12 @@
 "use client"
 
 import useSWR from "swr"
-import Link from "next/link"
+import Link from "next/link" // add edit/create navigation
 import { Nav } from "@/components/nav"
 import { getProfile } from "@/lib/api"
 import { GlassCard } from "@/components/glass-card"
 import { SkillBadges } from "@/components/skill-badges"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button" // use button styling
 
 export default function ProfilePage() {
   const { data, error, isLoading } = useSWR("profile", getProfile)
@@ -27,7 +27,7 @@ export default function ProfilePage() {
         ) : error ? (
           <>
             <GlassCard className="p-4 text-destructive">
-              No Profile Found
+              Failed to load profile: {String(error?.message || error)}
             </GlassCard>
             <GlassCard className="p-4">
               <div className="mt-3">
@@ -87,9 +87,7 @@ export default function ProfilePage() {
             <GlassCard className="p-5">
               <h3 className="text-base font-semibold text-primary">Education</h3>
               <ul className="mt-2 list-inside list-disc text-sm leading-6 text-foreground/80">
-                {data.education?.length
-                  ? data.education.map((e, i) => <li key={i}>{e}</li>)
-                  : <li>No education entries</li>}
+                {data.education?.map((e, i) => <li key={i}>{e}</li>) || <li>No education entries</li>}
               </ul>
             </GlassCard>
 
@@ -109,7 +107,7 @@ export default function ProfilePage() {
                         )}
                       </li>
                     ))
-                  : <li>No work entries</li>}
+                  : [<li key="none">No work entries</li>]}
               </ul>
             </GlassCard>
           </div>

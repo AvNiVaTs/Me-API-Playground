@@ -59,7 +59,7 @@ export default function ProfileEditPage() {
           <code className="bg-muted/50 px-1 py-0.5 rounded text-xs">
             {process.env.NEXT_PUBLIC_API_URL || "NEXT_PUBLIC_API_URL"}
           </code>{" "}
-          using REST endpoints. Adjust in lib/api.ts if needed.
+          using REST endpoints. Adjust in lib/api.js if needed.
         </p>
       </GlassCard>
     </main>
