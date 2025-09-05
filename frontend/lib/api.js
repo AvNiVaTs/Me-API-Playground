@@ -1,5 +1,3 @@
-import { ApiErr } from "../../backend/src/utils/ApiErr";
-
 export const API_BASE =
   (typeof window !== "undefined" && window.__API_BASE__) ||
   process.env.NEXT_PUBLIC_API_URL ||
@@ -38,11 +36,11 @@ async function apiFetch(path, opts = {}) {
     }
 
     const data = await res.json();
-    
-    if (data.statusCode >= 400) {
-      throw new ApiErr(data.statusCode, data.message || "Request failed");
-    }
 
+    if (!res.ok) {
+        throw new Error(data.message || "Request failed");
+    }
+    
     console.log("[v0] API Success:", data);
     return data.data;
   } catch (error) {

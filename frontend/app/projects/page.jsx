@@ -77,7 +77,7 @@ export default function ProjectsPage() {
           <p className="text-foreground/80">Loading...</p>
         ) : error ? (
           <GlassCard className="p-4 text-destructive">
-            Failed to load projects: {String(error.message || error)}
+            Failed to load projects
           </GlassCard>
         ) : projects && projects.length > 0 ? (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
