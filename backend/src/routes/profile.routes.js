@@ -3,8 +3,8 @@ import { createProfile, getProfile, updateProfile } from "../controllers/profile
 
 const router = Router()
 
-router.post("/", createProfile)
 router.get("/", getProfile)
+router.post("/", createProfile)
 router.put("/", updateProfile)
 
 export default router
